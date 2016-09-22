@@ -1,0 +1,132 @@
+function contentTruyenFull() {
+  $('.incontent-ad').remove()
+  var elem = null;
+  if(document.querySelector('#truyen')) {
+    elem = document.querySelector('#truyen');
+  } else if (document.querySelector('#chapter-c'))
+    elem = document.querySelector('#chapter-c');
+  else 
+    elem = document.querySelector('body');
+
+  return elem;
+}
+function getContent() {
+  var host = window.location.host;
+  var elem = null;
+  switch(host) {
+    case 'vnexpress.net':
+      var detail = document.querySelector('#article_detail');
+      if (detail) elem = detail;
+      else {
+        elem = document.querySelector('body');
+      }
+      break;
+    case "truyenfull.net":
+      elem = contentTruyenFull();
+      break;
+    default:
+      elem = document.querySelector('body');
+  }
+  return elem.innerText.split('\n').join(' ');
+}
+//////////////////////////////////////
+if(typeof(initFirstFlag) == 'undefined') initFirstFlag = false;
+if(typeof(texts) == 'undefined') texts = [];
+async function getJs() {
+  if (typeof($) == 'undefined') {
+      var request = new XMLHttpRequest();
+      var async = false;
+      request.open('GET', "https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js", async);
+      request.send();
+      eval(request.response);
+  }
+  LogChannel.postMessage('load js done');
+  function processText(text) {
+    text = text.split(' ');
+    text = text.join(' ');
+    return text;
+  }
+  async function initFirstFunc() {
+    var content = getContent();
+    texts = getListBy999(content);
+    for(i=0; i< texts.length; i++) {
+      LogChannel.postMessage(texts[i]);
+      var text = encodeURI(texts[i]);
+      var res = 'https://texttospeech.responsivevoice.org/v1/text:synthesize?lang=vi&engine=g3&name=&pitch=0.5&rate=0.5&volume=1&key=PL3QYYuV&gender=male&text='+text;
+      if (i == 0) {
+         AddChunkFirstChannel.postMessage(res + '|' + texts.length);
+      } else {
+         AddChunkChannel.postMessage(res + '|' + i);
+      }
+    }
+  }
+function getListBy999(text) {
+	var result = [];
+	while(text.length > 200) {
+        var index = getIndexByDot(text);
+        if (index == 0) index = getIndexBySpace(text);
+		result.push(text.substring(0, index));
+		text = text.substring(index);
+	}
+	if (text != ' ') result.push(text);
+	return result;
+}
+function getIndexByDot(text) {
+  var index = 200;
+  var k1 = text.charAt(index);
+  while(k1 != '.' && k1 != ',' && k1 != '\n' && k1 != '-' && k1 != '"' && k1 != "'") {
+    index--;
+    if (index == 0) return 0;
+    k1 = text.charAt(index);
+  }
+  return index;
+}
+function getIndexBySpace(text) {
+  var index = 200;
+  var k1 = text.charAt(index);
+  while(k1 != ' ') {
+    index--;
+    k1 = text.charAt(index);
+  }
+  return index;
+}
+  async function getResVbee(text){
+    var res = await $.get('https://texttospeech.responsivevoice.org/v1/text:synthesize', {
+      lang: "vi",
+      engine: "g3",
+      pitch: "0.5",
+      rate: "0.5",
+      volume: "1",
+      key: "PL3QYYuV",
+      gender: "male",
+      text: encodeURI(text)
+    });
+    res = JSON.parse(res);
+    return res;
+  }
+  async function main() {
+    // init();
+    if (initFirstFlag) return;
+    initFirstFlag = true;
+
+    await initFirstFunc();
+  }
+  try {
+    await main();
+  } catch(err){
+    window['loadJs'] = false;
+  }
+}
+
+ document.addEventListener("DOMContentLoaded", function(event) {
+    ClearChannel.postMessage('clear');
+    setTimeout(async function() {
+      await getJs();
+    }, 1000);
+ });
+
+function nextChapter() {
+  document.querySelector('#next_chap').click();
+}
+
+
