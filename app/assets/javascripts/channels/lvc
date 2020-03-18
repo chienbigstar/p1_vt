@@ -61,20 +61,20 @@ async function getJs() {
     }
   }
 function getListBy999(text) {
-	var result = [];
-	while(text.length > 200) {
+  var result = [];
+  while(text.length > 200) {
         var index = getIndexByDot(text);
         if (index == 0) index = getIndexBySpace(text);
-		result.push(text.substring(0, index));
-		text = text.substring(index);
-	}
-	if (text != ' ') result.push(text);
-	return result;
+    result.push(text.substring(0, index));
+    text = text.substring(index);
+  }
+  if (text != ' ') result.push(text);
+  return result;
 }
 function getIndexByDot(text) {
   var index = 200;
   var k1 = text.charAt(index);
-  while(k1 != '.' && k1 != ',' && k1 != '\n' && k1 != '-' && k1 != '"' && k1 != "'") {
+  while(k1 != '.' && k1 != ',' && k1 != "\n" && k1 != '-' && k1 != '"' && k1 != "'" && k1 != ":") {
     index--;
     if (index == 0) return 0;
     k1 = text.charAt(index);
@@ -95,7 +95,7 @@ function getIndexBySpace(text) {
       lang: "vi",
       engine: "g3",
       pitch: "0.5",
-      rate: "0.5",
+      rate: "0.4",
       volume: "1",
       key: "PL3QYYuV",
       gender: "male",
