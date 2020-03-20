@@ -10,6 +10,19 @@ function contentTruyenFull() {
 
   return elem;
 }
+function processText(elem) {
+  childs = $(elem).children();
+  if (childs.length == 0) {
+    console.log('0');
+    $(elem).text('.' + $(elem).text() + '.');
+  } 
+  else {
+    console.log('1');
+    $(childs).each(function() {
+      processText(this);
+    }); 
+  }
+}
 function getContent() {
   var host = window.location.host;
   var elem = null;
@@ -28,7 +41,17 @@ function getContent() {
     default:
       elem = document.querySelector('body');
   }
-  return elem.innerText.split('\n').join(' ');
+  elem = $(elem).clone()[0];
+  processText(elem);
+  text = $(elem).text();
+  if(text.charAt[0] == '.') text = text.slice(1);
+  text = text.replace(/\.(\s|\.|\,|\:|\!)*\./g, '.');
+  text = text.replace(/\!(\s|\.|\,|\:|\!)*\./g, '.');
+  text = text.replace(/\*(\s|\.|\,|\:|\!)*\./g, '.');
+  text = text.replace(/\:(\s|\.|\,|\:|\!)*\./g, '.');
+  text = text.replace(/\*(\s|\.|\,|\:|\!)*\*/g, '.');
+  text = text.replace(/\:(\s|\.|\,|\:|\!)*\*/g, '.');
+  return text;
 }
 //////////////////////////////////////
 if(typeof(initFirstFlag) == 'undefined') initFirstFlag = false;
