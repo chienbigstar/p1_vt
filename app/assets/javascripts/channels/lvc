@@ -11,6 +11,7 @@ function contentTruyenFull() {
   return elem;
 }
 function processText(elem) {
+  if (elem.tagName == "SCRIPT" && elem.tagName  == "BR"  && elem.tagName  == "STYLE") return;
   childs = $(elem).children();
   if (childs.length == 0) {
     console.log('0');
@@ -120,7 +121,7 @@ function getIndexBySpace(text) {
       lang: "vi",
       engine: "g3",
       pitch: "0.5",
-      rate: "0.4",
+      rate: "0.3",
       volume: "1",
       key: "PL3QYYuV",
       gender: "male",
