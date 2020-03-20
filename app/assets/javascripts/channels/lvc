@@ -11,7 +11,8 @@ function contentTruyenFull() {
   return elem;
 }
 function processText(elem) {
-  if (elem.tagName == "SCRIPT" || elem.tagName  ||  "BR"  ||  elem.tagName  || "STYLE") return;
+  console.log(elem.tagName);
+  if (elem.tagName == "SCRIPT" || elem.tagName  == "BR"  ||  elem.tagName == "STYLE") return;
   childs = $(elem).children();
   if (childs.length == 0) {
     console.log('0');
