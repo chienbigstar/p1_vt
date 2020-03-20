@@ -53,6 +53,7 @@ function getContent() {
   text = text.replace(/\:(\s|\.|\,|\:|\!)*\./g, '.');
   text = text.replace(/\*(\s|\.|\,|\:|\!)*\*/g, '.');
   text = text.replace(/\:(\s|\.|\,|\:|\!)*\*/g, '.');
+    text = text.replace(/\_(\s|\.|\,|\:|\!)*\_/g, '.');
   // $(elem).html($(elem2).html());
   return text;
 }
@@ -79,7 +80,7 @@ async function getJs() {
     for(i=0; i< texts.length; i++) {
       LogChannel.postMessage(texts[i]);
       var text = encodeURI(texts[i]);
-      var res = 'https://texttospeech.responsivevoice.org/v1/text:synthesize?lang=vi&engine=g3&name=&pitch=0.5&rate=0.4&volume=1&key=PL3QYYuV&gender=male&text='+text;
+      var res = 'https://texttospeech.responsivevoice.org/v1/text:synthesize?lang=vi&engine=g3&name=&pitch=0.5&rate=0.45&volume=1&key=PL3QYYuV&gender=male&text='+text;
       if (i == 0) {
          AddChunkFirstChannel.postMessage(res + '|' + texts.length);
       } else {
