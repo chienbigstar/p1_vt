@@ -122,7 +122,7 @@ function getIndexBySpace(text) {
       lang: "vi",
       engine: "g3",
       pitch: "0.5",
-      rate: "0.3",
+      rate: "0.2",
       volume: "1",
       key: "PL3QYYuV",
       gender: "male",
