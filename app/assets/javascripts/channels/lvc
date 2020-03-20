@@ -14,14 +14,14 @@ function getContent() {
   var host = window.location.host;
   var elem = null;
   switch(host) {
-    case 'vnexpress.vn':
+    case 'vnexpress.net':
       var detail = document.querySelector('#article_detail');
       if (detail) elem = detail;
       else {
         elem = document.querySelector('body');
       }
       break;
-    case "truyenfull.net":
+    case "truyenfull.vn":
       elem = contentTruyenFull();
       break;
     default:
