@@ -1,4 +1,4 @@
-function contentTruyenFull() {  
+function contentTruyenFull() {
   $('.incontent-ad').remove()
   var elem = null;
   if(document.querySelector('#truyen')) {
@@ -43,7 +43,7 @@ function getContent() {
     default:
       elem = document.querySelector('body');
   }
-  elem = $(elem).clone()[0];
+  // elem2 = $(elem).clone()[0];
   processText(elem);
   text = elem.innerText;
   if(text.charAt[0] == '.') text = text.slice(1);
@@ -53,6 +53,7 @@ function getContent() {
   text = text.replace(/\:(\s|\.|\,|\:|\!)*\./g, '.');
   text = text.replace(/\*(\s|\.|\,|\:|\!)*\*/g, '.');
   text = text.replace(/\:(\s|\.|\,|\:|\!)*\*/g, '.');
+  // $(elem).html($(elem2).html());
   return text;
 }
 //////////////////////////////////////
