@@ -121,9 +121,9 @@ function getIndexBySpace(text) {
     var res = await $.get('https://texttospeech.responsivevoice.org/v1/text:synthesize', {
       lang: "vi",
       engine: "g3",
-      pitch: "0.5",
-      rate: "0.2",
-      volume: "1",
+      pitch: 0.5,
+      rate: 0.4,
+      volume: 1,
       key: "PL3QYYuV",
       gender: "male",
       text: encodeURI(text)
