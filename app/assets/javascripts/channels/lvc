@@ -12,7 +12,7 @@ function contentTruyenFull() {
 }
 function processText(elem) {
   console.log(elem.tagName);
-  if (elem.tagName == "SCRIPT" || elem.tagName  == "BR"  ||  elem.tagName == "STYLE") return;
+  if (elem.tagName == "SCRIPT" || elem.tagName  == "BR"  ||  elem.tagName == "STYLE" || elem.tagName == "NOSCRIPT") return;
   childs = $(elem).children();
   if (childs.length == 0) {
     console.log('0');
@@ -21,7 +21,6 @@ function processText(elem) {
   else {
     console.log('1');
     $(childs).each(function() {
-      if (this.tagName != "SCRIPT" && this.tagName != "BR"  && this.tagName != "STYLE")
       processText(this);
     }); 
   }
@@ -46,7 +45,7 @@ function getContent() {
   }
   elem = $(elem).clone()[0];
   processText(elem);
-  text = $(elem).text();
+  text = $(elem).innerText();
   if(text.charAt[0] == '.') text = text.slice(1);
   text = text.replace(/\.(\s|\.|\,|\:|\!)*\./g, '.');
   text = text.replace(/\!(\s|\.|\,|\:|\!)*\./g, '.');
