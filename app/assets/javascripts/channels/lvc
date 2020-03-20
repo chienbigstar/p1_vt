@@ -14,7 +14,7 @@ function getContent() {
   var host = window.location.host;
   var elem = null;
   switch(host) {
-    case 'vnexpress.net':
+    case 'vnexpress.vn':
       var detail = document.querySelector('#article_detail');
       if (detail) elem = detail;
       else {
