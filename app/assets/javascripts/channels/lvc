@@ -19,6 +19,7 @@ function processText(elem) {
   else {
     console.log('1');
     $(childs).each(function() {
+      if (this.tagName != "SCRIPT" && this.tagName != "BR"  && this.tagName != "STYLE")
       processText(this);
     }); 
   }
