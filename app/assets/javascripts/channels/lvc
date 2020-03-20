@@ -21,6 +21,7 @@ function getContent() {
         elem = document.querySelector('body');
       }
       break;
+    case "truyenfull.net":
     case "truyenfull.vn":
       elem = contentTruyenFull();
       break;
