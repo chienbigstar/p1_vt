@@ -1,4 +1,4 @@
-function contentTruyenFull() { 
+function contentTruyenFull() {
   $('.incontent-ad').remove()
   var elem = null;
   if(document.querySelector('#truyen')) {
@@ -11,7 +11,7 @@ function contentTruyenFull() {
   return elem;
 }
 function processText(elem) {
-  if (elem.tagName == "SCRIPT" && elem.tagName  == "BR"  && elem.tagName  == "STYLE") return;
+  if (elem.tagName == "SCRIPT" || elem.tagName  ||  "BR"  ||  elem.tagName  || "STYLE") return;
   childs = $(elem).children();
   if (childs.length == 0) {
     console.log('0');
@@ -21,7 +21,7 @@ function processText(elem) {
     console.log('1');
     $(childs).each(function() {
       if (this.tagName != "SCRIPT" && this.tagName != "BR"  && this.tagName != "STYLE")
-      processText(this); 
+      processText(this);
     }); 
   }
 }
