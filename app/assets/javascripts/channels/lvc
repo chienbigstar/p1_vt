@@ -1,4 +1,4 @@
-function contentTruyenFull() {
+function contentTruyenFull() {  
   $('.incontent-ad').remove()
   var elem = null;
   if(document.querySelector('#truyen')) {
